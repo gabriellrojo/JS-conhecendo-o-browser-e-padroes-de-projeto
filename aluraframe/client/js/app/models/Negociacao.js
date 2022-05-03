@@ -1,6 +1,6 @@
 class Negociacao {
     constructor(data, quantidade, valor){
-        this.data = new Date(data);//utilizasse essa forma pois é possivel alterar o valor do objeto por através de um método, diferente dos dos metodos seguintes (nao sao simples ints); são objetos onde só é possível alterar o valor deles atribuindo um novo valor
+        this.data = data;//utilizasse essa forma pois é possivel alterar o valor do objeto por através de um método, diferente dos dos metodos seguintes (nao sao simples ints); são objetos onde só é possível alterar o valor deles atribuindo um novo valor
         this.quantidade = quantidade;
         this.valor = valor
         Object.freeze(this)

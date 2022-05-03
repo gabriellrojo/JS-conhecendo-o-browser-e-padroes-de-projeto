@@ -5,29 +5,30 @@ class NegociacaoController {
         this.inputData = $("#data");
         this.inputQuantidade = $("#quantidade");
         this.inputValor = $("#valor")
+        this.listaNegociacao = new ListaNegociacoes()
+        this.negociacaoView = new View ($(".negociacoes-view"))
+
+        this.negociacaoView.update(this.listaNegociacao)
+
     }
     
     adiciona(event){
         event.preventDefault();
-        let data = new Date(...this.inputData.value
-            .split("-")
-            .map((dado, indice) => { //[ano, dia, mes]
-                if(indice == 1){
-                    return dado - 1
-                }else {
-                    return dado
-                }
-            }))
-        
-        let negociacao = new Negociacao(data, this.inputQuantidade, this.inputValor)
 
-        console.log(negociacao.data)
+        //vamos chamar o DateHelper:
 
-        let novaData = negociacao.data.getDate()
-        + "/" + (negociacao.data.getMonth() + 1)
-        + "/" + negociacao.data.getFullYear()
+        let dataCorrigida = DataHelper.corrigeData(this.inputData.value);
         
-        console.log(novaData)
+        let negociacao = new Negociacao(dataCorrigida, this.inputQuantidade.value, this.inputValor.value)
+
+        this.listaNegociacao.adiciona(negociacao)
+
+        //tenho que chamar o update com a lista atualizada
+
+        this.negociacaoView.update(this.listaNegociacao)
+        console.log(this.listaNegociacao.lista())
+        
+
     }
 }
 
